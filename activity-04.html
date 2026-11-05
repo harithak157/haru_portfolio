@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Broadway Map | NLP Portfolio</title>
+
+<!-- Google Fonts matching index.html -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Figtree', system-ui, sans-serif;
+    background: linear-gradient(135deg, #fff0f6, #fce4f0, #f3e5f5);
+    color: #1e3a8a; /* Deep royal blue text */
+    min-height: 100vh;
+}
+
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(3px);
+    opacity: .4;
+    animation: float 9s ease-in-out infinite;
+}
+
+.blob.one {
+    width: 230px;
+    height: 230px;
+    background: #f5b8d5;
+    top: 5%;
+    left: -80px;
+}
+
+.blob.two {
+    width: 280px;
+    height: 280px;
+    background: #d9b8ed;
+    bottom: 5%;
+    right: -100px;
+    animation-delay: 3s;
+}
+
+@keyframes float {
+    50% { transform: translateY(-35px); }
+}
+
+.container {
+    width: 90%;
+    max-width: 1050px;
+    margin: auto;
+    padding: 40px 0;
+}
+
+.back {
+    color: #1e3a8a;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.back:hover {
+    color: #3b82f6;
+}
+
+.heading {
+    text-align: center;
+    margin: 60px 0 40px;
+}
+
+.heading span {
+    background: #f8d5e7;
+    color: #1e3a8a;
+    padding: 9px 20px;
+    border-radius: 25px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.heading h1 {
+    font-family: 'Pinyon Script', 'Snell Roundhand', cursive;
+    font-size: clamp(4rem, 10vw, 6rem);
+    color: #1e3a8a; 
+    margin: 22px 0 10px;
+    line-height: 1;
+    font-weight: 400;
+}
+
+.heading p {
+    color: #1e3a8a; 
+    font-weight: 500;
+    line-height: 1.8;
+    max-width: 750px;
+    margin: 0 auto;
+    font-size: 15px;
+}
+
+.tags {
+    margin-top: 18px;
+}
+
+.tags span {
+    display: inline-block;
+    background: #f8d5e7;
+    color: #1e3a8a;
+    padding: 8px 15px;
+    margin: 4px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Matching index.html h2 styling */
+.section-title {
+    font-family: 'Pinyon Script', 'Snell Roundhand', cursive;
+    color: #1e3a8a;
+    text-align: center;
+    margin: 55px 0 30px;
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+.card {
+    background: rgba(255,255,255,.85);
+    border: 1px solid #f3c6dd;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 25px rgba(180,85,135,.09);
+    transition: .4s;
+    animation: appear .7s ease both;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 30px rgba(180,85,135,.16);
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card h2 {
+    font-family: 'Pinyon Script', 'Snell Roundhand', cursive;
+    color: #1e3a8a;
+    margin-bottom: 12px;
+    font-size: 2.2rem;
+    font-weight: 400;
+}
+
+.card p, .card li {
+    color: #1e3a8a;
+    line-height: 1.9;
+    font-size: 15px;
+}
+
+.card ul {
+    padding-left: 22px;
+}
+
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 22px;
+}
+
+.resource-card {
+    background: rgba(255,255,255,.88);
+    border: 1px solid #f3c6dd;
+    border-radius: 20px;
+    padding: 25px;
+    transition: .4s;
+    box-shadow: 0 8px 25px rgba(180,85,135,.08);
+    display: flex;
+    flex-direction: column;
+}
+
+.resource-card:hover {
+    transform: translateY(-8px) rotateX(2deg);
+    box-shadow: 0 18px 30px rgba(180,85,135,.18);
+}
+
+.step {
+    color: #1e3a8a;
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    background: #f8d5e7;
+    width: fit-content;
+    padding: 4px 12px;
+    border-radius: 12px;
+}
+
+.resource-card h3 {
+    font-family: 'Pinyon Script', 'Snell Roundhand', cursive;
+    color: #1e3a8a;
+    margin-bottom: 12px;
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.resource-card p {
+    color: #1e3a8a;
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #1e3a8a;
+    font-size: 14px;
+    margin-top: 40px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="blob one"></div>
+    <div class="blob two"></div>
+</div>
+
+<div class="container">
+
+<a href="index.html#activities" class="back">
+    ← Back to Activities
+</a>
+
+<header class="heading">
+    <span>PROJECT OVERVIEW</span>
+    <h1>Broadway Map</h1>
+    <p>A location-based, show-aware Broadway theatre recommendation system that identifies and ranks nearby theatres and shows based on genre/mood preferences, verified show details, and travel accessibility.</p>
+
+    <div class="tags">
+        <span>NER</span>
+        <span>Information Extraction</span>
+        <span>Semantic Similarity</span>
+        <span>Text Classification</span>
+    </div>
+</header>
+
+<h2 class="section-title">Research Gaps</h2>
+<div class="grid-layout">
+    <div class="resource-card">
+        <div class="step">01</div>
+        <h3>Show-specific theatre matching</h3>
+        <p>Identifies theatres currently showing productions relevant to the user’s preferred genre, mood, language, or show type.</p>
+    </div>
+    <div class="resource-card">
+        <div class="step">02</div>
+        <h3>Show and availability verification</h3>
+        <p>Considers verified show details, schedules, ticket availability, accessibility features, and venue amenities.</p>
+    </div>
+    <div class="resource-card">
+        <div class="step">03</div>
+        <h3>Travel accessibility</h3>
+        <p>Ranks suitable theatres based on walking, subway, or road distance and estimated travel time.</p>
+    </div>
+</div>
+
+<h2 class="section-title">Role of NLP</h2>
+<div class="grid-layout">
+    <div class="resource-card">
+        <div class="step">01</div>
+        <h3>Theatre and show information extraction</h3>
+        <p>Extract show titles, genres, cast, schedules, venue features, and accessibility details from listings, descriptions, and reviews.</p>
+    </div>
+    <div class="resource-card">
+        <div class="step">02</div>
+        <h3>Understanding natural-language queries</h3>
+        <p>Identify show names, genres, actors, mood, location, and user search intent from natural-language queries.</p>
+    </div>
+    <div class="resource-card">
+        <div class="step">03</div>
+        <h3>Semantic matching</h3>
+        <p>Match different terms describing equivalent genres, moods, or show types using semantic similarity.</p>
+    </div>
+</div>
+
+<h2 class="section-title">NLP-Specific Skills</h2>
+<div class="grid-layout">
+    <div class="resource-card">
+        <div class="step">01</div>
+        <h3>Named Entity Recognition (NER)</h3>
+        <p>Identifying important entities such as show titles, theatre names, actors, genres, and locations.</p>
+    </div>
+    <div class="resource-card">
+        <div class="step">02</div>
+        <h3>Information Extraction</h3>
+        <p>Extracting show schedules, ticket availability, venue amenities, and accessibility information from text.</p>
+    </div>
+    <div class="resource-card">
+        <div class="step">03</div>
+        <h3>Semantic Similarity</h3>
+        <p>Finding similarities between different expressions with equivalent meanings, such as “family-friendly” and “kid-friendly.”</p>
+    </div>
+    <div class="resource-card">
+        <div class="step">04</div>
+        <h3>Text Classification</h3>
+        <p>Classifying show descriptions and reviews by genre, suitability, sentiment, or accessibility.</p>
+    </div>
+</div>
+
+<h2 class="section-title">Learning Outcomes</h2>
+<div class="card">
+    <ul>
+        <li>Understood how NLP can support location-based Broadway show and theatre recommendations.</li>
+        <li>Identified research gaps in show-specific theatre matching and accessibility-aware ranking.</li>
+        <li>Explored the role of NER and information extraction in theatre and show listings.</li>
+        <li>Understood how semantic similarity can match equivalent entertainment and genre terms.</li>
+        <li>Identified NLP techniques relevant to the proposed system.</li>
+    </ul>
+</div>
+
+</div>
+
+<footer>
+    Broadway Map &middot; NLP Portfolio
+</footer>
+
+</body>
+</html>

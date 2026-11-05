@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Activity 03 | NLP Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --blue: #2b4590;
+    --pink: #f4b9cb;
+    --soft: #fde6ee;
+    --card: #ffffff;
+    --mute: #6a79ad;
+    --script: "Pinyon Script", "Snell Roundhand", cursive;
+    --sans: "Figtree", system-ui, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--sans);
+    background: linear-gradient(135deg, #fff0f6, #fce4f0, #f3e5f5);
+    color: var(--blue);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(3px);
+    opacity: .4;
+    animation: float 9s ease-in-out infinite;
+}
+
+.blob.one {
+    width: 230px;
+    height: 230px;
+    background: #f5b8d5;
+    top: 5%;
+    left: -80px;
+}
+
+.blob.two {
+    width: 280px;
+    height: 280px;
+    background: #d9b8ed;
+    bottom: 5%;
+    right: -100px;
+    animation-delay: 3s;
+}
+
+@keyframes float {
+    50% { transform: translateY(-35px); }
+}
+
+.container {
+    width: 90%;
+    max-width: 1050px;
+    margin: auto;
+    padding: 40px 0;
+}
+
+.back {
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: color 0.3s;
+}
+
+.back:hover {
+    color: var(--pink);
+}
+
+.heading {
+    text-align: center;
+    margin: 50px 0 40px;
+}
+
+.heading span {
+    background: var(--soft);
+    color: var(--blue);
+    padding: 8px 18px;
+    border-radius: 25px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.heading h1 {
+    font-family: var(--script);
+    font-size: clamp(4rem, 10vw, 6rem);
+    color: var(--blue);
+    margin: 20px 0 10px;
+    line-height: 1;
+    font-weight: 400;
+}
+
+.heading p {
+    color: var(--mute);
+    font-weight: 500;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.tags {
+    margin-top: 18px;
+}
+
+.tags span {
+    display: inline-block;
+    background: var(--soft);
+    color: var(--blue);
+    padding: 6px 14px;
+    margin: 4px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.section-title {
+    color: var(--blue);
+    text-align: center;
+    margin: 60px 0 30px;
+    font-family: var(--script);
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid #f3c6dd;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 25px rgba(43, 69, 144, 0.05);
+    transition: .4s;
+    animation: appear .7s ease both;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 30px rgba(43, 69, 144, 0.1);
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card h2 {
+    font-family: var(--script);
+    color: var(--blue);
+    margin-bottom: 12px;
+    font-size: 2.2rem;
+    font-weight: 400;
+}
+
+.card p, .card li {
+    color: var(--mute);
+    line-height: 1.8;
+    font-size: 15px;
+}
+
+.card ul {
+    padding-left: 22px;
+}
+
+.step {
+    color: var(--blue);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    background: var(--soft);
+    width: fit-content;
+    padding: 4px 12px;
+    border-radius: 12px;
+}
+
+.resource-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+}
+
+.resource-card {
+    background: var(--card);
+    border: 1px solid #f3c6dd;
+    border-radius: 20px;
+    padding: 24px;
+    transition: .4s;
+    box-shadow: 0 8px 25px rgba(43, 69, 144, 0.05);
+}
+
+.resource-card:hover {
+    transform: translateY(-8px) rotateX(2deg);
+    box-shadow: 0 18px 30px rgba(43, 69, 144, 0.1);
+}
+
+.resource-card h3 {
+    font-family: var(--script);
+    color: var(--blue);
+    margin-bottom: 12px;
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.resource-card p {
+    color: var(--mute);
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 12px 0;
+}
+
+.resource-image {
+    width: 100%;
+    height: 250px;
+    object-fit: contain;
+    border-radius: 14px;
+    background: var(--soft);
+    border: 1px solid #f3c6dd;
+    display: block;
+}
+
+.placeholder-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 250px;
+    border-radius: 14px;
+    background: var(--soft);
+    border: 1px dashed #e3a6c6;
+    color: var(--blue);
+    font-size: 14px;
+    text-align: center;
+    padding: 10px;
+}
+
+.resource-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.resource-buttons a {
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 22px;
+    font-size: 14px;
+    font-weight: 600;
+    background: var(--soft);
+    color: var(--blue);
+    transition: .3s;
+}
+
+.resource-buttons a:hover {
+    background: var(--blue);
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: var(--mute);
+    font-size: 14px;
+}
+
+@media(max-width: 650px) {
+    .resource-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="blob one"></div>
+    <div class="blob two"></div>
+</div>
+
+<div class="container">
+
+    <a href="index.html#activities" class="back">
+        &larr; Back to Activities
+    </a>
+
+    <header class="heading">
+        <span>ACTIVITY 03</span>
+        <h1>FSA in Tamil</h1>
+        <p>Finite-State Representation and Tamil Morphotactics</p>
+
+        <div class="tags">
+            <span>Finite-State Automata</span>
+            <span>Tamil Morphology</span>
+            <span>NLP</span>
+        </div>
+    </header>
+
+    <div class="card">
+        <h2>About the Activity</h2>
+        <p>
+            This activity explores Finite-State Automata (FSA) and
+            Tamil morphotactics through a handwritten FSA diagram
+            and supporting notes. The materials illustrate how a
+            root can combine with grammatical suffixes such as
+            plural, tense and case markers to form different word forms.
+        </p>
+        <p>
+            It connects Tamil word formation with the idea of
+            representing valid morphological combinations through
+            states and transitions.
+        </p>
+    </div>
+
+    <h2 class="section-title">Objectives</h2>
+
+    <div class="card">
+        <ul>
+            <li>Review the uploaded finite-state automaton diagram.</li>
+            <li>Understand the role of roots and suffixes in Tamil word formation.</li>
+            <li>Identify examples of plural, tense and case markers in the notes.</li>
+            <li>Observe how morphological information can be represented as sequences of states or transitions.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Concepts &amp; Implementation</h2>
+
+    <div class="card">
+        <div class="step">01</div>
+        <h2>FSA Diagram</h2>
+        <p>Review the handwritten finite-state automaton diagram included in the activity materials and observe its state-based representation.</p>
+    </div>
+
+    <div class="card">
+        <div class="step">02</div>
+        <h2>Tamil Morphotactics</h2>
+        <p>Study the Tamil morphotactics notes showing how roots combine with grammatical suffixes to form different word forms.</p>
+    </div>
+
+    <div class="card">
+        <div class="step">03</div>
+        <h2>Suffix Combinations</h2>
+        <p>Observe examples involving plural suffixes, tense markers and case markers in Tamil word formation.</p>
+    </div>
+
+    <div class="card">
+        <div class="step">04</div>
+        <h2>Connecting Morphology and FSA</h2>
+        <p>Understand how finite-state models can represent valid sequences of morphemes and their combinations.</p>
+    </div>
+
+    <h2 class="section-title">Practical Work &amp; Outputs</h2>
+
+    <div class="resource-grid">
+
+        <div class="resource-card">
+            <h3>01. FSA Diagram</h3>
+            <img src="images/nlp_fsad.jpeg" alt="Handwritten FSA diagram" class="resource-image" onerror="this.outerHTML='<div class=&quot;placeholder-img&quot;>FSA diagram image could not be loaded</div>'">
+            <p>Handwritten finite-state automaton diagram used to explore state-based representation.</p>
+            <div class="resource-buttons">
+                <a href="images/nlp_fsad.jpeg" target="_blank">View Image</a>
+            </div>
+        </div>
+
+        <div class="resource-card">
+            <h3>02. Tamil Morphotactics Notes</h3>
+            <img src="images/nlp_fsaw.jpeg" alt="Tamil morphotactics handwritten notes" class="resource-image" onerror="this.outerHTML='<div class=&quot;placeholder-img&quot;>Tamil morphotactics image could not be loaded</div>'">
+            <p>Handwritten notes illustrating Tamil roots, plural suffixes, tense markers and case markers.</p>
+            <div class="resource-buttons">
+                <a href="images/nlp_fsaw.jpeg" target="_blank">View Image</a>
+            </div>
+        </div>
+
+    </div>
+
+    <h2 class="section-title">Learning Outcomes</h2>
+
+    <div class="card">
+        <ul>
+            <li>Reviewed a handwritten FSA representation.</li>
+            <li>Identified root and suffix components in Tamil morphology notes.</li>
+            <li>Understood examples of plural, tense and case markers.</li>
+            <li>Connected morphological word formation with finite-state representation.</li>
+        </ul>
+    </div>
+
+    <h2 class="section-title">Activity Summary</h2>
+
+    <div class="card" style="text-align:center;">
+        <h2>FSA in Tamil</h2>
+        <p>
+            This activity provides an introduction to the relationship
+            between Tamil morphology and Finite-State Automata.
+            Through the handwritten diagram and morphotactics notes,
+            it illustrates how roots and grammatical suffixes can be
+            understood as structured sequences.
+        </p>
+    </div>
+
+</div>
+
+<footer>
+    Activity 03 &middot; NLP Portfolio
+</footer>
+
+</body>
+</html>

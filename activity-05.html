@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avvaiyar's Arithu | NLP Portfolio</title>
+
+<!-- Google Fonts matching index.html -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Figtree', system-ui, sans-serif;
+    background: linear-gradient(135deg, #fff0f6, #fce4f0, #f3e5f5);
+    color: #1e3a8a;
+    min-height: 100vh;
+}
+
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(3px);
+    opacity: .4;
+    animation: float 9s ease-in-out infinite;
+}
+
+.blob.one {
+    width: 230px;
+    height: 230px;
+    background: #f5b8d5;
+    top: 5%;
+    left: -80px;
+}
+
+.blob.two {
+    width: 280px;
+    height: 280px;
+    background: #d9b8ed;
+    bottom: 5%;
+    right: -100px;
+    animation-delay: 3s;
+}
+
+@keyframes float {
+    50% { transform: translateY(-35px); }
+}
+
+.container {
+    width: 90%;
+    max-width: 1050px;
+    margin: auto;
+    padding: 40px 0;
+}
+
+.back {
+    color: #1e3a8a;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.back:hover {
+    color: #3b82f6;
+}
+
+.heading {
+    text-align: center;
+    margin: 60px 0 40px;
+}
+
+.heading span {
+    background: #f8d5e7;
+    color: #1e3a8a;
+    padding: 9px 20px;
+    border-radius: 25px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.heading h1 {
+    font-family: 'Pinyon Script', 'Snell Roundhand', cursive;
+    font-size: clamp(4rem, 10vw, 6rem);
+    color: #1e3a8a;
+    margin: 22px 0 10px;
+    line-height: 1;
+    font-weight: 400;
+}
+
+.heading p {
+    color: #1e3a8a; 
+    font-weight: 500;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 15px;
+}
+
+.tags {
+    margin-top: 18px;
+}
+
+.tags span {
+    display: inline-block;
+    background: #f8d5e7;
+    color: #1e3a8a;
+    padding: 8px 15px;
+    margin: 4px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Matching index.html h2 styling */
+.section-title {
+    font-family: 'Pinyon Script', 'Snell Roundhand', cursive;
+    color: #1e3a8a;
+    text-align: center;
+    margin: 55px 0 30px;
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+.card {
+    background: rgba(255,255,255,.85);
+    border: 1px solid #f3c6dd;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 25px rgba(180,85,135,.09);
+    transition: .4s;
+    animation: appear .7s ease both;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 30px rgba(180,85,135,.16);
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card h2 {
+    font-family: 'Pinyon Script', 'Snell Roundhand', cursive;
+    color: #1e3a8a;
+    margin-bottom: 12px;
+    font-size: 2.2rem;
+    font-weight: 400;
+}
+
+.card p, .card li {
+    color: #1e3a8a;
+    line-height: 1.9;
+    font-size: 15px;
+}
+
+.card ul {
+    padding-left: 22px;
+}
+
+.poem-text {
+    font-size: 15px;
+    line-height: 2;
+    white-space: pre-line;
+    margin-bottom: 20px;
+    font-weight: 500;
+    color: #1e3a8a;
+    text-align: center;
+}
+
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 22px;
+}
+
+.resource-card {
+    background: rgba(255,255,255,.88);
+    border: 1px solid #f3c6dd;
+    border-radius: 20px;
+    padding: 25px;
+    transition: .4s;
+    box-shadow: 0 8px 25px rgba(180,85,135,.08);
+    display: flex;
+    flex-direction: column;
+}
+
+.resource-card:hover {
+    transform: translateY(-8px) rotateX(2deg);
+    box-shadow: 0 18px 30px rgba(180,85,135,.18);
+}
+
+.step {
+    color: #1e3a8a;
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    background: #f8d5e7;
+    width: fit-content;
+    padding: 4px 12px;
+    border-radius: 12px;
+}
+
+.resource-card h3 {
+    font-family: 'Pinyon Script', 'Snell Roundhand', cursive;
+    color: #1e3a8a;
+    margin-bottom: 12px;
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.resource-card p {
+    color: #1e3a8a;
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.score-box {
+    text-align: center;
+    background: #f8d5e7;
+    border-radius: 12px;
+    padding: 15px;
+    margin-top: 15px;
+}
+.score-box h4 {
+    color: #1e3a8a;
+    font-size: 22px;
+    margin: 0;
+}
+.score-box p {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.rubric-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+.rubric-list li {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed #f3c6dd;
+    padding: 8px 0;
+    font-size: 14px;
+}
+.rubric-list li:last-child {
+    border-bottom: none;
+    font-weight: bold;
+    color: #1d4ed8;
+    margin-top: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #1e3a8a;
+    font-size: 14px;
+    margin-top: 40px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="blob one"></div>
+    <div class="blob two"></div>
+</div>
+
+<div class="container">
+
+<a href="index.html#activities" class="back">
+    ← Back to Activities
+</a>
+
+<header class="heading">
+    <span>ACTIVITY 05</span>
+    <h1>Avvaiyar's Arithu</h1>
+    <p>Comparing an LLM-generated English translation with a human English translation of Avvaiyar's poem on the rarity of human birth, analysing semantic, lexical and cultural similarities.</p>
+
+    <div class="tags">
+        <span>Tamil</span>
+        <span>Machine Translation</span>
+        <span>Similarity Evaluation</span>
+    </div>
+</header>
+
+<h2 class="section-title">Original Tamil Poem</h2>
+<div class="card">
+    <div class="poem-text">
+        அரியது கேட்கின் வரிவடி வேலோய்!<br>
+        அரிதரிது மானிடர் ஆதல் அரிது;<br>
+        மானிடர் ஆயினும் கூன்குருடு செவிடு<br>
+        பேடு நீங்கிப் பிறத்தல் அரிது;<br>
+        பேடு நீங்கிப் பிறந்த காலையும்<br>
+        ஞானமும் கல்வியும் நயத்தல் அரிது;<br>
+        ஞானமும் கல்வியும் நயந்த காலையும்<br>
+        தானமும் தவமும் தான்செயல் அரிது;<br>
+        தானமும் தவமும் தான்செய்வ ராயின்<br>
+        வானவர் நாடு வழிதிறந் திடுமே.
+    </div>
+</div>
+
+<h2 class="section-title">Meaning of the Poem</h2>
+<div class="card">
+    <p>This philosophical poem by Avvaiyar describes the extreme rarity of a truly meaningful human life. It outlines a step-by-step progression: It is rare to be born human; even rarer to be born without physical defects; rarer still to acquire wisdom and education; and even rarer to actually practice charity and penance. However, the poet concludes that if one does perform these good deeds, the gates of heaven will open for them.</p>
+</div>
+
+<h2 class="section-title">Original Source</h2>
+<div class="card">
+    <ul>
+        <li><strong>Author:</strong> Avvaiyar (ஔவையார்)</li>
+        <li><strong>Work:</strong> Moodhurai (மூதுரை)</li>
+        <li><strong>Era:</strong> Medieval Tamil Literature</li>
+    </ul>
+</div>
+
+<h2 class="section-title">Translation Comparison</h2>
+<div class="grid-layout">
+    <div class="resource-card">
+        <h3>LLM English Translation</h3>
+        <div class="poem-text" style="font-size: 14px; text-align: left; line-height: 1.8; font-weight: 400;">
+            Rare is it to listen, O wielder of the striped spear!<br>
+            Rare, extremely rare is it to be born as a human;<br>
+            Even if born human, rare is it to be born<br>
+            Without being a hunchback, blind, deaf, or disabled;<br>
+            Even if born without these defects,<br>
+            Rare is it to attain wisdom and education;<br>
+            Even if one attains wisdom and education,<br>
+            Rare is it to perform charity and penance oneself;<br>
+            If one does perform charity and penance,<br>
+            The gates of the heavenly realm will open wide.
+        </div>
+    </div>
+
+    <div class="resource-card">
+        <h3>Translation from Another Source</h3>
+        <p style="margin-bottom: 10px; font-size: 12px;"><strong>Source:</strong> Classical Tamil Scholar</p>
+        <div class="poem-text" style="font-size: 14px; text-align: left; line-height: 1.8; font-weight: 400;">
+            Hearken, O Lord with the striped spear!<br>
+            It is exceedingly rare to be born a human;<br>
+            Even if human, rare to be free from hunchback, blindness, deafness, and impotence;<br>
+            Even if born free from these, rare is the desire for wisdom and learning;<br>
+            Even if one desires wisdom and learning, rare is the act of charity and penance;<br>
+            If one does perform charity and penance, the gates of heaven open.
+        </div>
+    </div>
+</div>
+
+<h2 class="section-title">Translation Evaluation</h2>
+<div class="grid-layout">
+    <div class="resource-card">
+        <h3>Similarity Analysis</h3>
+        <div class="score-box">
+            <p>Cosine Similarity Score</p>
+            <h4>65.32%</h4>
+        </div>
+        <ul class="rubric-list" style="margin-top: 20px;">
+            <li><span>Lexical Similarity</span> <span>Medium</span></li>
+            <li><span>Semantic Similarity</span> <span>High</span></li>
+            <li><span>Cultural Similarity</span> <span>High</span></li>
+        </ul>
+    </div>
+
+    <div class="resource-card">
+        <h3>Observed Differences</h3>
+        <p>The LLM translation provides a clearer, modern explanation for the archaic terms (translating "பேடு" as "disabled" broadly, and explicitly stating "heavenly realm"). The human translation uses older phrasing like "impotence" for "பேடு" and "hearken" for "கேட்கின்," preserving a slightly more formal, traditional tone that matches the era of the original text.</p>
+    </div>
+</div>
+
+<h2 class="section-title">Evaluation Rubric</h2>
+<div class="grid-layout">
+    <div class="resource-card">
+        <h3>LLM Translation</h3>
+        <ul class="rubric-list">
+            <li><span>Translation Accuracy</span> <span>4.5/5</span></li>
+            <li><span>Lexical Faithfulness</span> <span>3.5/5</span></li>
+            <li><span>Semantic Similarity</span> <span>4.5/5</span></li>
+            <li><span>Cultural Preservation</span> <span>4/5</span></li>
+            <li><span>Grammatical Correctness</span> <span>5/5</span></li>
+            <li><span>Fluency and Readability</span> <span>4.5/5</span></li>
+            <li><span>Poetic Quality</span> <span>4/5</span></li>
+            <li><span>Total Score</span> <span>30/35 · 85.71%</span></li>
+        </ul>
+    </div>
+
+    <div class="resource-card">
+        <h3>Human Translation</h3>
+        <ul class="rubric-list">
+            <li><span>Translation Accuracy</span> <span>4/5</span></li>
+            <li><span>Lexical Faithfulness</span> <span>4.5/5</span></li>
+            <li><span>Semantic Similarity</span> <span>4.5/5</span></li>
+            <li><span>Cultural Preservation</span> <span>5/5</span></li>
+            <li><span>Grammatical Correctness</span> <span>4/5</span></li>
+            <li><span>Fluency and Readability</span> <span>4/5</span></li>
+            <li><span>Poetic Quality</span> <span>4.5/5</span></li>
+            <li><span>Total Score</span> <span>30.5/35 · 87.14%</span></li>
+        </ul>
+    </div>
+</div>
+
+<h2 class="section-title">Overall Comparison</h2>
+<div class="card">
+    <p>Based on the evaluation rubric, the human translation scores slightly higher (87.14%) compared to the LLM translation (85.71%). While the LLM translation scores perfectly on grammatical correctness and modern readability, the human translation excels in lexical faithfulness and cultural preservation. The human translator's choice of words better reflects the historical and religious context of Avvaiyar's era, whereas the LLM chose safer, more generalized terms.</p>
+</div>
+
+<h2 class="section-title">Learning Outcomes</h2>
+<div class="card">
+    <ul>
+        <li>Compared two English translations of Avvaiyar's philosophical poem.</li>
+        <li>Observed how AI handles culturally specific terms (like "பேடு") compared to human translators.</li>
+        <li>Explored semantic and cultural similarity in translation.</li>
+        <li>Reviewed cosine similarity and rubric-based evaluation.</li>
+        <li>Understood the importance of preserving meaning and cultural context during translation.</li>
+    </ul>
+</div>
+
+</div>
+
+<footer>
+    Avvaiyar's Arithu &middot; NLP Portfolio
+</footer>
+
+</body>
+</html>

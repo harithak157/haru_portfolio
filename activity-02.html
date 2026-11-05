@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Activity 02 | NLP Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --blue: #2b4590;
+    --pink: #f4b9cb;
+    --soft: #fde6ee;
+    --card: #ffffff;
+    --mute: #6a79ad;
+    --script: "Pinyon Script", "Snell Roundhand", cursive;
+    --sans: "Figtree", system-ui, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--sans);
+    background: linear-gradient(135deg, #fff0f6, #fce4f0, #f3e5f5);
+    color: var(--blue);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(3px);
+    opacity: .4;
+    animation: float 9s ease-in-out infinite;
+}
+
+.blob.one {
+    width: 230px;
+    height: 230px;
+    background: #f5b8d5;
+    top: 5%;
+    left: -80px;
+}
+
+.blob.two {
+    width: 280px;
+    height: 280px;
+    background: #d9b8ed;
+    bottom: 5%;
+    right: -100px;
+    animation-delay: 3s;
+}
+
+@keyframes float {
+    50% { transform: translateY(-35px); }
+}
+
+.container {
+    width: 90%;
+    max-width: 1050px;
+    margin: auto;
+    padding: 40px 0;
+}
+
+.back {
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: color 0.3s;
+}
+
+.back:hover {
+    color: var(--pink);
+}
+
+.heading {
+    text-align: center;
+    margin: 50px 0 40px;
+}
+
+.heading span {
+    background: var(--soft);
+    color: var(--blue);
+    padding: 8px 18px;
+    border-radius: 25px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.heading h1 {
+    font-family: var(--script);
+    font-size: clamp(4rem, 10vw, 6rem);
+    color: var(--blue);
+    margin: 20px 0 10px;
+    line-height: 1;
+    font-weight: 400;
+}
+
+.heading p {
+    color: var(--mute);
+    font-weight: 500;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.tags {
+    margin-top: 18px;
+}
+
+.tags span {
+    display: inline-block;
+    background: var(--soft);
+    color: var(--blue);
+    padding: 6px 14px;
+    margin: 4px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.section-title {
+    color: var(--blue);
+    text-align: center;
+    margin: 60px 0 30px;
+    font-family: var(--script);
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid #f3c6dd;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 25px rgba(43, 69, 144, 0.05);
+    transition: .4s;
+    animation: appear .7s ease both;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 30px rgba(43, 69, 144, 0.1);
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card h2 {
+    font-family: var(--script);
+    color: var(--blue);
+    margin-bottom: 12px;
+    font-size: 2.2rem;
+    font-weight: 400;
+}
+
+.card p, .card li {
+    color: var(--mute);
+    line-height: 1.8;
+    font-size: 15px;
+}
+
+.card ul {
+    padding-left: 22px;
+}
+
+.step {
+    color: var(--blue);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    background: var(--soft);
+    width: fit-content;
+    padding: 4px 12px;
+    border-radius: 12px;
+}
+
+.download {
+    display: block;
+    width: fit-content;
+    margin: 25px auto;
+    padding: 14px 28px;
+    border-radius: 30px;
+    background: var(--blue);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .3s;
+    box-shadow: 0 4px 15px rgba(43, 69, 144, 0.2);
+}
+
+.download:hover {
+    transform: translateY(-5px);
+    background: #1d326d;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: var(--mute);
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="blob one"></div>
+    <div class="blob two"></div>
+</div>
+
+<div class="container">
+
+<a href="index.html#activities" class="back">
+    &larr; Back to Activities
+</a>
+
+<header class="heading">
+    <span>ACTIVITY 02</span>
+    <h1>Hands-on Session 2</h1>
+    <p>Name Classification and Text Representation</p>
+
+    <div class="tags">
+        <span>NLTK</span>
+        <span>Naive Bayes</span>
+        <span>CountVectorizer</span>
+    </div>
+</header>
+
+<div class="card">
+    <h2>About the Activity</h2>
+    <p>
+        This practical session explores name classification and text
+        representation. The notebook works with the NLTK names corpus
+        to build a simple gender classifier using the final letter of
+        a name. It also introduces binary bag-of-words features and
+        cosine similarity for comparing short text documents.
+    </p>
+</div>
+
+<h2 class="section-title">Objectives</h2>
+
+<div class="card">
+    <ul>
+        <li>Load and inspect the NLTK names corpus.</li>
+        <li>Create labelled male and female name examples.</li>
+        <li>Represent each name using its final character as a feature.</li>
+        <li>Train and test an NLTK NaiveBayesClassifier.</li>
+        <li>Build binary bag-of-words features using CountVectorizer.</li>
+        <li>Calculate cosine similarity between two text descriptions.</li>
+    </ul>
+</div>
+
+<h2 class="section-title">Concepts &amp; Implementation</h2>
+
+<div class="card">
+    <div class="step">01</div>
+    <h2>Load the Names Corpus</h2>
+    <p>Download the NLTK names resource and inspect the number and sample of names.</p>
+</div>
+
+<div class="card">
+    <div class="step">02</div>
+    <h2>Prepare Labelled Data</h2>
+    <p>Combine names from male.txt and female.txt with their corresponding labels.</p>
+</div>
+
+<div class="card">
+    <div class="step">03</div>
+    <h2>Extract Features</h2>
+    <p>Represent each name with a last_letter feature based on its final character.</p>
+</div>
+
+<div class="card">
+    <div class="step">04</div>
+    <h2>Train a Classifier</h2>
+    <p>Shuffle the feature sets, split training and testing data, and train a Naive Bayes classifier.</p>
+</div>
+
+<div class="card">
+    <div class="step">05</div>
+    <h2>Binary Bag-of-Words</h2>
+    <p>Use CountVectorizer(binary=True) to learn a vocabulary and transform text into binary bag-of-words vectors.</p>
+</div>
+
+<div class="card">
+    <div class="step">06</div>
+    <h2>Cosine Similarity</h2>
+    <p>Use cosine_similarity() to compare vector representations of two OCR-related sentences.</p>
+</div>
+
+<h2 class="section-title">Learning Outcomes</h2>
+
+<div class="card">
+    <ul>
+        <li>Prepared labelled examples from a built-in corpus.</li>
+        <li>Implemented a simple feature-based Naive Bayes classification workflow.</li>
+        <li>Explored binary bag-of-words representation.</li>
+        <li>Used cosine similarity to compare document vectors.</li>
+        <li>Observed a basic URL text download example using urllib.request.</li>
+    </ul>
+</div>
+
+<h2 class="section-title">Complete Activity Notebook</h2>
+
+<div class="card" style="text-align:center;">
+    <h2>Google Colab Notebook</h2>
+    <p>Access the complete notebook containing all exercises and implementation.</p>
+
+    <a class="download" href="https://colab.research.google.com/drive/1_JcVGyQooOCsyMEg-dzXiERrVjAWhqHt?usp=sharing" target="_blank" rel="noopener noreferrer">
+       Open Notebook in Google Colab
+    </a>
+</div>
+
+</div>
+
+<footer>
+     Activity 02 &middot; NLP Portfolio
+</footer>
+
+</body>
+</html>

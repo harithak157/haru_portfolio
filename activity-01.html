@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Activity 01 | NLP Portfolio</title>
+
+<!-- Google Fonts matching index.html -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg: #fce4f0;
+    --blue: #2b4590;
+    --pink: #eda2b8;
+    --soft: #fde6ee;
+    --card: #ffffff;
+    --mute: #6a79ad;
+    
+    --script: "Pinyon Script", "Snell Roundhand", cursive;
+    --sans: "Figtree", system-ui, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--blue);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(3px);
+    opacity: .4;
+    animation: float 9s ease-in-out infinite;
+}
+
+.blob.one {
+    width: 230px;
+    height: 230px;
+    background: var(--pink);
+    top: 5%;
+    left: -80px;
+}
+
+.blob.two {
+    width: 280px;
+    height: 280px;
+    background: #d9b8ed;
+    bottom: 5%;
+    right: -100px;
+    animation-delay: 3s;
+}
+
+@keyframes float {
+    50% { transform: translateY(-35px); }
+}
+
+.container {
+    width: 90%;
+    max-width: 1050px;
+    margin: auto;
+    padding: 40px 0;
+}
+
+.back {
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: color 0.3s;
+}
+
+.back:hover {
+    color: var(--pink);
+}
+
+.heading {
+    text-align: center;
+    margin: 50px 0 40px;
+}
+
+.heading span {
+    background: var(--soft);
+    color: var(--blue);
+    padding: 8px 18px;
+    border-radius: 25px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.heading h1 {
+    font-family: var(--script);
+    font-size: clamp(4rem, 10vw, 6rem);
+    color: var(--blue);
+    margin: 20px 0 10px;
+    line-height: 1;
+    font-weight: 400;
+}
+
+.heading p {
+    color: var(--blue);
+    font-weight: 500;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.tags {
+    margin-top: 18px;
+}
+
+.tags span {
+    display: inline-block;
+    background: var(--soft);
+    color: var(--blue);
+    padding: 6px 14px;
+    margin: 4px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Section Titles matching index.html */
+.section-title {
+    color: var(--blue);
+    text-align: center;
+    margin: 60px 0 30px;
+    font-family: var(--script);
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+.card {
+    background: var(--card);
+    border: 1px solid #cf7ca7;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 25px rgba(43, 69, 144, 0.05);
+    transition: .4s;
+    animation: appear .7s ease both;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 30px rgba(43, 69, 144, 0.1);
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card h2 {
+    font-family: var(--script);
+    color: var(--blue);
+    margin-bottom: 12px;
+    font-size: 2.2rem;
+    font-weight: 400;
+}
+
+.card p, .card li {
+    color: var(--mute);
+    line-height: 1.8;
+    font-size: 15px;
+}
+
+.card ul {
+    padding-left: 22px;
+}
+
+.step {
+    color: var(--blue);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    background: var(--soft);
+    width: fit-content;
+    padding: 4px 12px;
+    border-radius: 12px;
+}
+
+/* --- Updated Implementation sections --- */
+.resource-grid {
+    display: flex;
+    justify-content: center; /* Centers the single card */
+    gap: 22px;
+}
+
+.resource-card {
+    background: var(--card);
+    border: 1px solid #f3c6dd;
+    border-radius: 20px;
+    padding: 24px;
+    transition: .4s;
+    box-shadow: 0 8px 25px rgba(43, 69, 144, 0.05);
+    width: 100%;
+    max-width: 800px; /* Allows the card to be wider for the large image */
+}
+
+.resource-card:hover {
+    transform: translateY(-8px) rotateX(2deg);
+    box-shadow: 0 18px 30px rgba(43, 69, 144, 0.1);
+}
+
+.resource-card h3 {
+    font-family: var(--script);
+    color: var(--blue);
+    margin-bottom: 12px;
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.resource-card p {
+    color: var(--mute);
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 15px 0 0 0;
+    text-align: center;
+}
+
+/* Increased height and centering for the word cloud image */
+.resource-image {
+    width: 100%;
+    height: 450px; /* Increased length */
+    object-fit: contain; /* Ensures the whole word cloud is visible without cropping */
+    border-radius: 14px;
+    background: var(--soft);
+    border: 1px solid #f3c6dd;
+    padding: 10px;
+}
+
+.resource-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+.resource-buttons a {
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 22px;
+    font-size: 14px;
+    font-weight: 600;
+    background: var(--soft);
+    color: var(--blue);
+    transition: .3s;
+}
+
+.resource-buttons a:hover {
+    background: var(--blue);
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+.download {
+    display: block;
+    width: fit-content;
+    margin: 35px auto;
+    padding: 14px 28px;
+    border-radius: 30px;
+    background: var(--blue);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .3s;
+    box-shadow: 0 4px 15px rgba(43, 69, 144, 0.2);
+}
+
+.download:hover {
+    transform: translateY(-5px);
+    background: #1d326d;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: var(--mute);
+    font-size: 14px;
+}
+
+@media(max-width: 650px) {
+    .resource-image {
+        height: 250px; /* Smaller height on mobile screens */
+    }
+}
+
+.placeholder-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 450px;
+    border-radius: 14px;
+    background: var(--soft);
+    border: 1px dashed #e3a6c6;
+    color: var(--blue);
+    font-size: 14px;
+    text-align: center;
+    padding: 10px;
+}
+.edit-note {
+    background: var(--bg);
+    border: 1px dashed #e3a6c6;
+    border-radius: 14px;
+    padding: 12px 16px;
+    color: var(--mute);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 22px;
+}
+.resource-card img.resource-image {
+    display: block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="blob one"></div>
+    <div class="blob two"></div>
+</div>
+
+<div class="container">
+
+<a href="index.html#activities" class="back">
+    &larr; Back to Activities
+</a>
+
+<header class="heading">
+    <span>ACTIVITY 01</span>
+    <h1>Hands-on Session 1</h1>
+    <p>Exploring Natural Language Processing with NLTK</p>
+
+    <div class="tags">
+        <span>Python</span>
+        <span>NLTK</span>
+        <span>Corpus Analysis</span>
+    </div>
+</header>
+
+<div class="card">
+    <h2>About the Activity</h2>
+    <p>This practical session introduces NLTK and basic text-processing workflows. The notebook explores tokenization, built-in corpora, word-frequency analysis, stopword filtering and word-cloud comparisons of inaugural speeches.</p>
+</div>
+
+<h2 class="section-title">Objectives</h2>
+
+<div class="card">
+    <ul>
+        <li>Set up NLTK and download its language resources.</li>
+        <li>Tokenize a sample sentence using word_tokenize().</li>
+        <li>Explore the Brown Corpus and Inaugural Address Corpus.</li>
+        <li>Use FreqDist and ConditionalFreqDist to examine word frequencies.</li>
+        <li>Remove English stopwords before analysing text.</li>
+        <li>Compare word clouds from selected Reagan and Clinton speeches.</li>
+    </ul>
+</div>
+
+<h2 class="section-title">Concepts &amp; Implementation</h2>
+
+<div class="card">
+    <div class="step">01</div>
+    <h2>NLTK Setup</h2>
+    <p>Import NLTK, download the required resources and inspect the installed version.</p>
+</div>
+
+<div class="card">
+    <div class="step">02</div>
+    <h2>Tokenization</h2>
+    <p>Apply word_tokenize() to a short sentence and observe the resulting tokens.</p>
+</div>
+
+<div class="card">
+    <div class="step">03</div>
+    <h2>Corpus Exploration</h2>
+    <p>Inspect Brown Corpus categories and access speeches from the Inaugural Address Corpus.</p>
+</div>
+
+<div class="card">
+    <div class="step">04</div>
+    <h2>Frequency Analysis</h2>
+    <p>Create a FreqDist for an inaugural speech and a ConditionalFreqDist grouped by word length.</p>
+</div>
+
+<div class="card">
+    <div class="step">05</div>
+    <h2>Stopword Filtering</h2>
+    <p>Load English stopwords and create a filtered token list.</p>
+</div>
+
+<div class="card">
+    <div class="step">06</div>
+    <h2>Word-cloud Comparison</h2>
+    <p>Combine the 1981 and 1985 Reagan speeches and the 1993 and 1997 Clinton speeches, then generate separate word clouds.</p>
+</div>
+
+<h2 class="section-title">Practical Work &amp; Outputs</h2>
+
+<div class="resource-grid">
+
+    <div class="resource-card">
+        <h3 style="text-align: center;">Word-cloud Comparison</h3>
+        <!-- Ensure your image path is correct when you upload it to the web -->
+        <img src="images/nlp_wordcloud.png" alt="Word-cloud Comparison output" class="resource-image">
+        <p>Comparing word usage across selected inaugural speeches.</p>
+    </div>
+
+</div>
+
+<h2 class="section-title">Learning Outcomes</h2>
+
+<div class="card">
+    <ul>
+        <li>Practised basic NLTK setup and tokenization.</li>
+        <li>Explored text corpora and retrieved speech text by file ID.</li>
+        <li>Applied frequency distributions to a text corpus.</li>
+        <li>Understood the effect of stopword removal on word-frequency analysis.</li>
+        <li>Created a visual comparison of word usage across two groups of inaugural speeches.</li>
+    </ul>
+</div>
+
+<h2 class="section-title">Complete Activity Notebook</h2>
+
+<div class="card" style="text-align:center;">
+    <h2>Google Colab Notebook</h2>
+    <p>Access the complete notebook containing all exercises and implementation.</p>
+
+    <a class="download" href="https://colab.research.google.com/drive/1K2PTgLEkCv4h-tUp0qXwGa69Pw9SzeBo?usp=sharing" target="_blank">&darr; Open Notebook in Google Colab</a>
+</div>
+
+</div>
+
+<footer>
+     Activity 01 &middot; NLP Portfolio
+</footer>
+
+</body>
+</html>

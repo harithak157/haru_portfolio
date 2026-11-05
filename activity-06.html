@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loanword Tracing | NLP Portfolio</title>
+
+<!-- Google Fonts matching index.html -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Figtree', system-ui, sans-serif;
+    background: linear-gradient(135deg, #fff0f6, #fce4f0, #f3e5f5);
+    color: #1e3a8a;
+    min-height: 100vh;
+}
+
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(3px);
+    opacity: .4;
+    animation: float 9s ease-in-out infinite;
+}
+
+.blob.one {
+    width: 230px;
+    height: 230px;
+    background: #f5b8d5;
+    top: 5%;
+    left: -80px;
+}
+
+.blob.two {
+    width: 280px;
+    height: 280px;
+    background: #d9b8ed;
+    bottom: 5%;
+    right: -100px;
+    animation-delay: 3s;
+}
+
+@keyframes float {
+    50% { transform: translateY(-35px); }
+}
+
+.container {
+    width: 90%;
+    max-width: 1050px;
+    margin: auto;
+    padding: 40px 0;
+}
+
+.back {
+    color: #1e3a8a;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.back:hover {
+    color: #3b82f6;
+}
+
+.heading {
+    text-align: center;
+    margin: 60px 0 40px;
+}
+
+.heading span {
+    background: #f8d5e7;
+    color: #1e3a8a;
+    padding: 9px 20px;
+    border-radius: 25px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.heading h1 {
+    font-family: 'Pinyon Script', 'Snell Roundhand', cursive;
+    font-size: clamp(4rem, 10vw, 6rem);
+    color: #1e3a8a;
+    margin: 22px 0 10px;
+    line-height: 1;
+    font-weight: 400;
+}
+
+.heading p {
+    color: #1e3a8a; 
+    font-weight: 500;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 15px;
+}
+
+.tags {
+    margin-top: 18px;
+}
+
+.tags span {
+    display: inline-block;
+    background: #f8d5e7;
+    color: #1e3a8a;
+    padding: 8px 15px;
+    margin: 4px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Matching index.html h2 styling */
+.section-title {
+    font-family: 'Pinyon Script', 'Snell Roundhand', cursive;
+    color: #1e3a8a;
+    text-align: center;
+    margin: 55px 0 30px;
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+.card {
+    background: rgba(255,255,255,.85);
+    border: 1px solid #f3c6dd;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 25px rgba(180,85,135,.09);
+    transition: .4s;
+    animation: appear .7s ease both;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 30px rgba(180,85,135,.16);
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card h2 {
+    font-family: 'Pinyon Script', 'Snell Roundhand', cursive;
+    color: #1e3a8a;
+    margin-bottom: 12px;
+    font-size: 2.2rem;
+    font-weight: 400;
+}
+
+.card p, .card li {
+    color: #1e3a8a;
+    line-height: 1.9;
+    font-size: 15px;
+}
+
+.card ul, .card ol {
+    padding-left: 22px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 14px;
+}
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #f3c6dd;
+    color: #1e3a8a;
+}
+th {
+    background-color: #f8d5e7;
+    font-weight: 600;
+}
+tr:hover {
+    background-color: #fff0f6;
+}
+
+.arch-flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+}
+.arch-step {
+    background: #f8d5e7;
+    color: #1e3a8a;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 14px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 4px 10px rgba(180,85,135,.1);
+}
+.arch-arrow {
+    color: #1e3a8a;
+    font-weight: bold;
+    font-size: 20px;
+    opacity: 0.6;
+}
+
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 22px;
+}
+
+.single-layout {
+    display: flex;
+    justify-content: center;
+}
+
+.resource-card {
+    background: rgba(255,255,255,.88);
+    border: 1px solid #f3c6dd;
+    border-radius: 20px;
+    padding: 25px;
+    transition: .4s;
+    box-shadow: 0 8px 25px rgba(180,85,135,.08);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.single-layout .resource-card {
+    max-width: 600px;
+}
+
+.resource-card:hover {
+    transform: translateY(-8px) rotateX(2deg);
+    box-shadow: 0 18px 30px rgba(180,85,135,.18);
+}
+
+.step {
+    color: #1e3a8a;
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    background: #f8d5e7;
+    width: fit-content;
+    padding: 4px 12px;
+    border-radius: 12px;
+}
+
+.resource-card h3 {
+    font-family: 'Pinyon Script', 'Snell Roundhand', cursive;
+    color: #1e3a8a;
+    margin-bottom: 12px;
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.resource-card p {
+    color: #1e3a8a;
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #1e3a8a;
+    font-size: 14px;
+    margin-top: 40px;
+    opacity: 0.8;
+}
+
+.demo-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+    margin-top: 20px;
+}
+
+.demo-item {
+    background: rgba(255,255,255,.88);
+    border: 1px solid #f3c6dd;
+    border-radius: 18px;
+    padding: 12px;
+    box-shadow: 0 8px 25px rgba(180,85,135,.09);
+    transition: .4s;
+    overflow: hidden;
+}
+
+.demo-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 30px rgba(180,85,135,.16);
+}
+
+.demo-item img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.demo-item img:hover {
+    transform: scale(1.02);
+}
+
+.demo-item p {
+    text-align: center;
+    color: #1e3a8a;
+    font-size: 14px;
+    margin-top: 12px;
+    font-weight: 500;
+}
+
+.project-link {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 22px;
+    background: #f8d5e7;
+    color: #1e3a8a;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.project-link:hover {
+    background: #1e3a8a;
+    color: white;
+}
+
+@media(max-width:650px) {
+    .demo-gallery {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="blob one"></div>
+    <div class="blob two"></div>
+</div>
+
+<div class="container">
+
+<a href="index.html#activities" class="back">
+    ← Back to Activities
+</a>
+<header class="heading">
+    <span>MY NLP PROJECT</span>
+    <h1>Loanword Tracing</h1>
+    <p>A Computational Linguistics and Explainable Machine Learning Platform. Exploring the historical migration of words across languages through character-level linguistic analysis, machine learning, and explainable AI.</p>
+
+    <div class="tags">
+        <span>Computational Linguistics</span>
+        <span>Machine Learning</span>
+        <span>Explainable AI</span>
+        <span>Python</span>
+        <span>React</span>
+    </div>
+</header>
+
+<h2 class="section-title">Motivation & Existing Gap</h2>
+<div class="grid-layout">
+    <div class="resource-card">
+        <h3>Motivation</h3>
+        <p>Languages continuously evolve through cultural contact, trade, migration, and communication. During these interactions, words travel from one language to another, adapting their spelling and pronunciation along the way.<br><br>
+        This project aims to computationally investigate lexical borrowing by identifying probable donor languages, analyzing character-level linguistic patterns, and tracing historically documented word migration pathways across multiple languages.</p>
+    </div>
+    <div class="resource-card">
+        <h3>Existing Gap</h3>
+        <p>Traditional etymology resources such as Wiktionary and Etymonline primarily provide dictionary-based historical information for previously documented words.<br><br>
+        Existing digital resources have limited predictive capabilities for uncatalogued words and do not provide character-level quantitative explanations of linguistic similarities.<br><br>
+        This motivated the development of a system that combines machine learning-based donor language prediction, character-level explainability, and historically documented etymological evidence to explore how words migrate between languages.</p>
+    </div>
+</div>
+
+<h2 class="section-title">Architecture</h2>
+<div class="card">
+    <div class="arch-flow">
+        <div class="arch-step">Linguistic Dataset Collection</div>
+        <div class="arch-arrow">&darr;</div>
+        <div class="arch-step">Text Preprocessing and Unicode Normalization</div>
+        <div class="arch-arrow">&darr;</div>
+        <div class="arch-step">Script Detection and Transliteration</div>
+        <div class="arch-arrow">&darr;</div>
+        <div class="arch-step">Character N-Gram Feature Extraction (TF-IDF)</div>
+        <div class="arch-arrow">&darr;</div>
+        <div class="arch-step">Multiclass Logistic Regression / Complement Naive Bayes</div>
+        <div class="arch-arrow">&darr;</div>
+        <div class="arch-step">Donor Language Prediction</div>
+        <div class="arch-arrow">&darr;</div>
+        <div class="arch-step">Character-Level Explainability</div>
+        <div class="arch-arrow">&darr;</div>
+        <div class="arch-step">Historical Etymology Cross-Referencing</div>
+        <div class="arch-arrow">&darr;</div>
+        <div class="arch-step">Interactive Loanword Tracing Website</div>
+    </div>
+</div>
+
+<h2 class="section-title">Complete Tech Stack</h2>
+<div class="card">
+    <table>
+        <tr><th>Component</th><th>Technology</th></tr>
+        <tr><td>Programming Language</td><td>Python</td></tr>
+        <tr><td>NLP</td><td>Unicode Normalization, Character N-Grams</td></tr>
+        <tr><td>Data Processing</td><td>Pandas, NumPy</td></tr>
+        <tr><td>Feature Extraction</td><td>Character N-Gram TF-IDF</td></tr>
+        <tr><td>Machine Learning</td><td>Scikit-learn</td></tr>
+        <tr><td>Classification</td><td>Logistic Regression, Complement Naive Bayes</td></tr>
+        <tr><td>Explainable AI</td><td>Character-Level Feature Attribution</td></tr>
+        <tr><td>Backend</td><td>Python FastAPI</td></tr>
+        <tr><td>Frontend</td><td>React, HTML, CSS, JavaScript</td></tr>
+        <tr><td>UI Framework</td><td>Tailwind CSS, Vite</td></tr>
+        <tr><td>Visualization</td><td>Recharts</td></tr>
+        <tr><td>Model Evaluation</td><td>Accuracy, Macro F1-Score, Top-K Accuracy, Confusion Matrix</td></tr>
+        <tr><td>Website</td><td>Interactive Loanword Tracing and Language Explorer</td></tr>
+    </table>
+</div>
+
+<h2 class="section-title">Dataset Used</h2>
+<div class="card">
+    <p><strong>Dataset:</strong> Multi-Language Loanword Corpus<br>
+    <strong>Source:</strong> Annotated linguistic and etymological records.<br>
+    <strong>Size:</strong> 220 annotated loanword migration records.<br>
+    <strong>Language Coverage:</strong> 5 recipient languages and 12 donor languages.<br>
+    <strong>Data:</strong> Words, transliterations, donor languages, recipient languages, intermediate languages, meanings, spelling changes, historical notes, and references.<br>
+    <strong>Dataset Format:</strong> CSV (<code>loanwords.csv</code>)</p>
+    
+    <h3 style="margin-top: 20px; font-size: 2rem;">Example Loanword Records</h3>
+    <table>
+        <tr><th>Recipient Word</th><th>Recipient Language</th><th>Donor Language</th><th>Meaning</th></tr>
+        <tr><td>ஜன்னல் (Jannal)</td><td>Tamil</td><td>Portuguese</td><td>Window</td></tr>
+        <tr><td>மேஜை (Mejai)</td><td>Tamil</td><td>Portuguese</td><td>Table</td></tr>
+        <tr><td>मेज (Mez)</td><td>Hindi</td><td>Portuguese</td><td>Table</td></tr>
+    </table>
+    <p style="font-size: 12px; margin-top: 15px; font-style: italic; opacity: 0.8;">*Note: These are illustrative examples from the project documentation, not a claim that every word has the same borrowing history across languages.</p>
+</div>
+
+<h2 class="section-title">NLP Pipeline</h2>
+<div class="grid-layout">
+    <div class="resource-card">
+        <div class="step">01</div>
+        <h3>Raw Dataset</h3>
+        <p>Collect and organize annotated loanword records containing words, meanings, donor languages, recipient languages, and historical references.</p>
+    </div>
+    <div class="resource-card">
+        <div class="step">02</div>
+        <h3>Text Preprocessing and Normalization</h3>
+        <p>Normalize input text using Unicode NFC normalization to ensure consistent representation of words across different scripts.</p>
+    </div>
+    <div class="resource-card">
+        <div class="step">03</div>
+        <h3>Script Detection and Transliteration</h3>
+        <p>Identify the writing system of the input word using Unicode character ranges. Use normalized phonetic transliterations for cross-language character analysis.</p>
+    </div>
+    <div class="resource-card">
+        <div class="step">04</div>
+        <h3>Character N-Gram Feature Extraction</h3>
+        <p>Extract overlapping character n-grams of lengths 1–4 and convert them into numerical representations using TF-IDF vectorization.</p>
+    </div>
+    <div class="resource-card">
+        <div class="step">05</div>
+        <h3>Machine Learning Classification</h3>
+        <p>Train a balanced multiclass Logistic Regression classifier to predict the probable donor language. Compare its performance with Complement Naive Bayes as a baseline model.</p>
+    </div>
+    <div class="resource-card">
+        <div class="step">06</div>
+        <h3>Character-Level Explainability</h3>
+        <p>Analyze the contribution of individual character sequences to the predicted language using learned model weights and TF-IDF values. Display these contributions through a character-level heatmap.</p>
+    </div>
+    <div class="resource-card">
+        <div class="step">07</div>
+        <h3>Historical Evidence Cross-Referencing</h3>
+        <p>Search the annotated linguistic corpus to identify documented donor languages, intermediate borrowing stages, spelling adaptations, and historical references.</p>
+    </div>
+    <div class="resource-card">
+        <div class="step">08</div>
+        <h3>Evaluation and Visualization</h3>
+        <p>Evaluate the model using accuracy, Macro F1-Score, Top-K accuracy, and confusion matrices. Visualize prediction probabilities, character influences, and historical migration pathways.</p>
+    </div>
+    <div class="resource-card">
+        <div class="step">09</div>
+        <h3>Interactive Loanword Exploration</h3>
+        <p>Integrate the trained model and historical corpus into a website where users can explore word origins, compare language pairs, and investigate linguistic migration patterns.</p>
+    </div>
+</div>
+
+<h2 class="section-title">Users, Inputs and Outputs</h2>
+<div class="card">
+    <table>
+        <tr><th>Component</th><th>Description</th></tr>
+        <tr><td>Users</td><td>Linguistics Researchers, Students, Language Enthusiasts, NLP Researchers</td></tr>
+        <tr><td>Input</td><td>Words entered in native scripts or transliterated forms</td></tr>
+        <tr><td>Input Format</td><td>Tamil, Hindi, Malayalam, Telugu, Arabic, Latin and other supported scripts</td></tr>
+        <tr><td>Dataset Input</td><td>CSV containing annotated loanword migration records</td></tr>
+        <tr><td>Processing</td><td>Unicode normalization, script detection, character n-gram extraction, TF-IDF, classification</td></tr>
+        <tr><td>Model Output</td><td>Predicted donor language, confidence score, and top-5 predictions</td></tr>
+        <tr><td>Explainability</td><td>Character-level linguistic influence heatmap</td></tr>
+        <tr><td>Historical Output</td><td>Documented donor language, intermediate stages, spelling changes, and references</td></tr>
+        <tr><td>Visualization</td><td>Prediction probability charts, migration pathways, character influence heatmaps, and language-pair analysis</td></tr>
+    </table>
+</div>
+
+<h2 class="section-title">Model Performance</h2>
+<div class="card">
+    <p>The project evaluates Logistic Regression against Complement Naive Bayes using a stratified 80/20 train-test split.</p>
+    <table>
+        <tr><th>Evaluation Metric</th><th>Logistic Regression</th><th>Complement Naive Bayes</th></tr>
+        <tr><td>Top-1 Accuracy</td><td>43.18%</td><td>38.64%</td></tr>
+        <tr><td>Top-3 Accuracy</td><td>72.73%</td><td>&mdash;</td></tr>
+        <tr><td>Top-5 Accuracy</td><td>81.82%</td><td>&mdash;</td></tr>
+        <tr><td>Macro F1-Score</td><td>0.3545</td><td>0.2080</td></tr>
+    </table>
+    <p style="margin-top: 15px;"><strong>Key Observation:</strong> Logistic Regression performed better than Complement Naive Bayes across the reported accuracy and Macro F1 metrics. Top-5 accuracy indicates that the correct donor language appears among the five highest-ranked predictions in 81.82% of the evaluation samples.</p>
+</div>
+
+<h2 class="section-title">Interactive Website Features</h2>
+<div class="grid-layout">
+    <div class="resource-card">
+        <div class="step">01</div>
+        <h3>Loanword Explorer</h3>
+        <p>Enter a word in its native script or transliterated form to investigate its probable linguistic origin.</p>
+    </div>
+    <div class="resource-card">
+        <div class="step">02</div>
+        <h3>AI Donor Language Prediction</h3>
+        <p>Display the predicted donor language, confidence score, and alternative language predictions.</p>
+    </div>
+    <div class="resource-card">
+        <div class="step">03</div>
+        <h3>Character Influence Heatmap</h3>
+        <p>Highlight individual characters and character sequences that contribute to the machine learning prediction.</p>
+    </div>
+    <div class="resource-card">
+        <div class="step">04</div>
+        <h3>Historical Migration Pathway</h3>
+        <p>Visualize documented borrowing stages, including intermediate languages, spelling adaptations, and historical references.</p>
+    </div>
+    <div class="resource-card">
+        <div class="step">05</div>
+        <h3>Language Pair Analysis</h3>
+        <p>Explore borrowing relationships between donor and recipient languages, including common character patterns and example words.</p>
+    </div>
+    <div class="resource-card">
+        <div class="step">06</div>
+        <h3>Dataset Explorer</h3>
+        <p>Browse, search, filter, and export the annotated loanword dataset.</p>
+    </div>
+    <div class="resource-card">
+        <div class="step">07</div>
+        <h3>Model Performance Dashboard</h3>
+        <p>Explore classification metrics, confusion matrices, and baseline model comparisons.</p>
+    </div>
+    <div class="resource-card">
+        <div class="step">08</div>
+        <h3>Evidence and Prediction Comparison</h3>
+        <p>Compare the model's statistical prediction with documented historical evidence and highlight disagreements.</p>
+    </div>
+</div>
+
+<h2 class="section-title">Project Files</h2>
+<div class="single-layout">
+    <div class="resource-card" style="text-align:center; align-items:center;">
+        <h3>GitHub Repository</h3>
+        <p>Explore the complete source code, dataset, machine learning implementation, backend, and frontend files.</p>
+        <a href="https://github.com/harithak157/loanword-tracing-nlp" target="_blank" class="project-link">
+           View Repository &nearr;
+        </a>
+    </div>
+</div>
+
+<h2 class="section-title">Demo Gallery</h2>
+<div class="demo-gallery">
+    <div class="demo-item">
+        <img src="images/Screenshot 2026-11-01 223038.png" alt="Loanword Explorer Interface">
+        <p>01 &middot; Loanword Explorer</p>
+    </div>
+    <div class="demo-item">
+        <img src="images/Screenshot 2026-11-01 223138.png" alt="Donor Language Prediction">
+        <p>02 &middot; Donor Language Prediction</p>
+    </div>
+    <div class="demo-item">
+        <img src="images/Screenshot 2026-11-01 223426.png" alt="Character Influence Heatmap">
+        <p>03 &middot; Character Influence Heatmap</p>
+    </div>
+    <div class="demo-item">
+        <img src="images/Screenshot 2026-11-01 223156.png 2026-11-01 223156.png" alt="Historical Migration Pathway">
+        <p>04 &middot; Historical Migration Pathway</p>
+    </div>
+    <div class="demo-item">
+        <img src="images/nlp_project_pic.jpeg" alt="Presented to Mam">
+        <p>05 &middot; Presented to Mam</p>
+    </div>
+    <div class="demo-item">
+        <img src="images/nlp_project_pic2.jpeg" alt="Presented to Mam">
+        <p>06 &middot; Presented to Mam</p>
+    </div>
+</div>
+
+<h2 class="section-title">References</h2>
+<div class="card">
+    <ol>
+        <li>Burrow, T. and Emeneau, M. B. (1984) &ndash; <em>A Dravidian Etymological Dictionary</em>.</li>
+        <li>Etymonline &ndash; Online Etymology Dictionary.</li>
+        <li>Wiktionary &ndash; Multilingual Etymological and Lexical Database.</li>
+        <li>WOLD &ndash; World Loanword Database.</li>
+        <li>DEDR &ndash; Dravidian Etymological Dictionary.</li>
+        <li>Scikit-learn Documentation &ndash; Character N-Gram Feature Extraction and TF-IDF.</li>
+        <li>Scikit-learn Documentation &ndash; Logistic Regression and Complement Naive Bayes.</li>
+        <li>Unicode Consortium &ndash; Unicode Standard and Normalization Forms.</li>
+        <li>FastAPI Documentation &ndash; REST API Development.</li>
+        <li>Relevant scholarly linguistic references recorded in the project's annotated loanword corpus.</li>
+    </ol>
+</div>
+
+</div>
+
+<footer>
+    Loanword Tracing &mdash; Exploring the journey of words across languages through computational linguistics and explainable machine learning.
+</footer>
+
+</body>
+</html>
